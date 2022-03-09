@@ -1,0 +1,3 @@
+self_msgs_and_srvs/input_point[] input_traj
+---
+self_msgs_and_srvs/output_point[] output_traj

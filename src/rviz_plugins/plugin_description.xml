@@ -1,0 +1,8 @@
+<library path="lib/librviz_plugins">
+  <class name="rviz_plugins/Goal3DTool" type="rviz::Goal3DTool" base_class_type="rviz::Tool">
+    <description>
+      Tool for setting 3D goal
+    </description>
+  </class>
+
+</library>

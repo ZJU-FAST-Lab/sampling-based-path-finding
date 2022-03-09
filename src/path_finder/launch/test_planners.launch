@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <arg name="global_env_pcd2_topic" value="/random_forest/all_map" />
+  <arg name="map_size_x" value="50.0" />
+  <arg name="map_size_y" value="50.0" />
+  <arg name="map_size_z" value="8.0" />
+  <arg name="origin_x" value=" -25.0" />
+  <arg name="origin_y" value=" -25.0" />
+  <arg name="origin_z" value=" -1.0" />
+  <arg name="resolution" value="0.5" />
+
+  <arg name="steer_length" value="2.0" />
+  <arg name="search_radius" value="6.0" />
+  <arg name="search_time" value="0.1" />
+  <arg name="max_tree_node_nums" value="5000" />
+  <arg name="use_informed_sampling" value="false" />
+  <arg name="use_GUILD_sampling" value="true" />
+  <arg name="run_rrt" value="true" />
+  <arg name="run_rrt_star" value="true" />
+  <arg name="run_rrt_sharp" value="true" />
+
+
+  <node pkg="path_finder" type="path_finder" name="path_finder_node" output="screen">
+    <remap from="/global_cloud" to="$(arg global_env_pcd2_topic)"/>
+
+    <param name="run_rrt" value="$(arg run_rrt)" type="bool"/>
+    <param name="run_rrt_star" value="$(arg run_rrt_star)" type="bool"/>
+    <param name="run_rrt_sharp" value="$(arg run_rrt_sharp)" type="bool"/>
+
+    <param name="occ_map/origin_x" value="$(arg origin_x)" type="double"/>
+    <param name="occ_map/origin_y" value="$(arg origin_y)" type="double"/>
+    <param name="occ_map/origin_z" value="$(arg origin_z)" type="double"/>
+    <param name="occ_map/map_size_x" value="$(arg map_size_x)" type="double"/>
+    <param name="occ_map/map_size_y" value="$(arg map_size_y)" type="double"/>
+    <param name="occ_map/map_size_z" value="$(arg map_size_z)" type="double"/>
+    <param name="occ_map/resolution" value="$(arg resolution)" type="double"/>
+
+    <param name="RRT/steer_length" value="$(arg steer_length)" type="double"/>
+    <param name="RRT/search_radius" value="$(arg search_radius)" type="double"/>
+    <param name="RRT/search_time" value="$(arg search_time)" type="double"/>
+    <param name="RRT/max_tree_node_nums" value="$(arg max_tree_node_nums)" type="int"/>
+
+    <param name="RRT_Star/steer_length" value="$(arg steer_length)" type="double"/>
+    <param name="RRT_Star/search_radius" value="$(arg search_radius)" type="double"/>
+    <param name="RRT_Star/search_time" value="$(arg search_time)" type="double"/>
+    <param name="RRT_Star/max_tree_node_nums" value="$(arg max_tree_node_nums)" type="int"/>
+    <param name="RRT_Star/use_informed_sampling" value="$(arg use_informed_sampling)" type="bool"/>
+    <param name="RRT_Star/use_GUILD_sampling" value="$(arg use_GUILD_sampling)" type="bool"/>
+
+    <param name="RRT_Sharp/steer_length" value="$(arg steer_length)" type="double"/>
+    <param name="RRT_Sharp/search_radius" value="$(arg search_radius)" type="double"/>
+    <param name="RRT_Sharp/search_time" value="$(arg search_time)" type="double"/>
+    <param name="RRT_Sharp/max_tree_node_nums" value="$(arg max_tree_node_nums)" type="int"/>
+    <param name="RRT_Sharp/use_informed_sampling" value="$(arg use_informed_sampling)" type="bool"/>
+    <param name="RRT_Sharp/use_GUILD_sampling" value="$(arg use_GUILD_sampling)" type="bool"/>
+
+  </node>
+
+</launch>

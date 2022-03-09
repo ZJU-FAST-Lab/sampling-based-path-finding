@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <arg name="odom_topic" value="/visual_slam/odom" />
+  <arg name="global_env_pcd2_topic" value="/random_forest/all_map" />
+
+  <arg name="simulation" default="true"/>
+  <arg name="drone_number" default="1"/>
+
+  <arg name="map_size_x" value="50.0"/>
+  <arg name="map_size_y" value="50.0"/>
+  <arg name="map_size_z" value="8.0"/>
+
+  <arg name="init_x" value="0.0"/>
+  <arg name="init_y" value="0.0"/>
+  <arg name="init_z" value="0.0"/>
+
+  <arg name="forest" value="1"/>
+
+  <!-- map generation -->
+  <!-- env for front-end compare-->
+  <node pkg="map_generator" name="random_forest" type="random_forest" output="screen" if="$(arg forest)">
+    <remap from="~odometry" to="$(arg odom_topic)"/>
+    <param name="init_state_x" value="$(arg init_x)"/>
+    <param name="init_state_y" value="$(arg init_y)"/>
+    <param name="map/x_size" value="$(arg map_size_x)" />
+    <param name="map/y_size" value="$(arg map_size_y)" />
+    <param name="map/z_size" value="$(arg map_size_z)" />
+    <param name="map/obs_num" value="120"/>
+    <param name="map/circle_num" value="100"/>
+    <param name="map/resolution" value="0.1"/>
+    <param name="ObstacleShape/lower_rad" value="0.4"/>
+    <param name="ObstacleShape/upper_rad" value="2.5"/>
+    <param name="ObstacleShape/lower_hei" value="0.5"/>
+    <param name="ObstacleShape/upper_hei" value="7.5"/>
+    <param name="CircleShape/lower_circle_rad" value="0.9"/>
+    <param name="CircleShape/upper_circle_rad" value="3.2"/>
+    <param name="sensing/rate" value="1.0"/>
+  </node>
+  <include file="$(find mockamap)/launch/mockamap.launch" unless="$(arg forest)"/>
+
+</launch>

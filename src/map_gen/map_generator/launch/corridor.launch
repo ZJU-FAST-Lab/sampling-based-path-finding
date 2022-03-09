@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+  <node pkg="map_generator" type="map_generator_high.py" name="random_map_sensing" output="screen">
+    <param name="map/x_size" value="3.0" type="double"/>
+    <param name="map/y_size" value="100.0" type="double"/>
+    <param name="map/z_size" value="2.0" type="double"/>
+    <param name="step_size" value="2.0" type="double"/>
+
+    <param name="resolution" value="0.1" type="double"/>
+    <param name="narrow_gap_vertical" value="0.8" type="double"/>
+
+  </node>
+
+  <node pkg="rviz" type="rviz" name="rviz" output="screen" args="-d $(find state_machine)/launch/corridor.rviz"/>
+  
+</launch>
