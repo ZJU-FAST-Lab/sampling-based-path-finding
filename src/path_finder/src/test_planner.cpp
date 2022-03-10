@@ -136,8 +136,8 @@ public:
                 vector<std::pair<double, double>> slns = rrt_sharp_ptr_->getSolutions();
                 ROS_INFO_STREAM("[RRT#] final path len: " << slns.back().first);
             }
-            start_ = goal_;
         }
+        start_ = goal_;
     }
 
     void executionCallback(const ros::TimerEvent &event)

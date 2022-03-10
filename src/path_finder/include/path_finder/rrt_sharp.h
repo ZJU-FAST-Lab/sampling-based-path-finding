@@ -302,6 +302,7 @@ namespace path_plan
         double min_dist_from_start(nearest_node->cost_from_start + dist2nearest);
         double cost_from_p(dist2nearest);
         RRTNode3DPtr min_node(nearest_node); //set the nearest_node as the default parent
+        // TODO sort by potential cost-from-start
         for (auto &curr_node : neighbour_nodes.nearing_nodes)
         {
           if (curr_node.node_ptr == nearest_node) // the nearest_node already calculated and checked collision free

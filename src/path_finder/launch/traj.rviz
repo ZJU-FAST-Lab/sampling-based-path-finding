@@ -9,7 +9,6 @@ Panels:
         - /Mapping1/input_obs1/Autocompute Value Bounds1
         - /Mapping1/global_occ1/Autocompute Value Bounds1
         - /Planning1
-        - /Planning1/local_set1/Status1
       Splitter Ratio: 0.6735293865203857
     Tree Height: 926
   - Class: rviz/Selection
@@ -148,21 +147,21 @@ Visualization Manager:
           Queue Size: 100
           Value: true
         - Class: rviz/MarkerArray
-          Enabled: true
+          Enabled: false
           Marker Topic: /path_finder_node/tree_vertice
           Name: vertice
           Namespaces:
-            "": true
+            {}
           Queue Size: 100
-          Value: true
+          Value: false
         - Class: rviz/Marker
-          Enabled: true
+          Enabled: false
           Marker Topic: /path_finder_node/tree_edges
           Name: edges
           Namespaces:
-            "": true
+            {}
           Queue Size: 100
-          Value: true
+          Value: false
         - Class: rviz/MarkerArray
           Enabled: true
           Marker Topic: /path_finder_node/informed_set
@@ -176,7 +175,7 @@ Visualization Manager:
           Marker Topic: /path_finder_node/local_set
           Name: local_set
           Namespaces:
-            {}
+            "": true
           Queue Size: 100
           Value: true
         - Class: rviz/MarkerArray
@@ -378,15 +377,15 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 14.004929542541504
-        Y: 0.920852780342102
+        X: 13.968873023986816
+        Y: 0.9227308034896851
         Z: 4.327508213464171e-5
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.089796781539917
+      Pitch: 1.1447964906692505
       Target Frame: map
       Value: XYOrbit (rviz)
       Yaw: 0.0008611679077148438

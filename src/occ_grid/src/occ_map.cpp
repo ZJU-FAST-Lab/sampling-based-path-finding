@@ -20,7 +20,6 @@ OF SUCH DAMAGE.
 */
 #include "occ_grid/occ_map.h"
 #include "occ_grid/raycast.h"
-#include <cv_bridge/cv_bridge.h>
 #include <visualization_msgs/Marker.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <tf2_ros/static_transform_broadcaster.h>
