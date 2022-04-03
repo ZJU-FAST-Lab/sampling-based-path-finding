@@ -194,7 +194,7 @@ namespace path_plan
     void changeNodeParent(RRTNode3DPtr &node, RRTNode3DPtr &parent, const double &cost_from_parent)
     {
       if (node->parent)
-        node->parent->children.remove(node); //DON'T FORGET THIS, remove it form its parent's children list
+        node->parent->children.remove(node); // DON'T FORGET THIS, remove it form its parent's children list
       node->parent = parent;
       node->cost_from_parent = cost_from_parent;
       node->cost_from_start = parent->cost_from_start + cost_from_parent;
@@ -237,7 +237,7 @@ namespace path_plan
 
       /* kd tree init */
       kdtree *kd_tree = kd_create(3);
-      //Add start and goal nodes to kd tree
+      // Add start and goal nodes to kd tree
       kd_insert3(kd_tree, start_node_->x[0], start_node_->x[1], start_node_->x[2], start_node_);
 
       /* main loop */
@@ -285,15 +285,15 @@ namespace path_plan
           RRTNode3DPtr curr_node = (RRTNode3DPtr)kd_res_item_data(nbr_set);
           neighbour_nodes.nearing_nodes.emplace_back(curr_node, false, false);
           // store range query result so that we dont need to query again for rewire;
-          kd_res_next(nbr_set); //go to next in kd tree range query result
+          kd_res_next(nbr_set); // go to next in kd tree range query result
         }
-        kd_res_free(nbr_set); //reset kd tree range query
+        kd_res_free(nbr_set); // reset kd tree range query
 
         /* choose parent from kd tree range query result*/
         double dist2nearest = calDist(nearest_node->x, x_new);
         double min_dist_from_start(nearest_node->cost_from_start + dist2nearest);
         double cost_from_p(dist2nearest);
-        RRTNode3DPtr min_node(nearest_node); //set the nearest_node as the default parent
+        RRTNode3DPtr min_node(nearest_node); // set the nearest_node as the default parent
         // TODO sort by potential cost-from-start
         for (auto &curr_node : neighbour_nodes.nearing_nodes)
         {
@@ -514,8 +514,7 @@ namespace path_plan
       rand = std::floor(rand);
 
       RRTNode3DPtr beacon = nodes_pool_[rand];
-      while (beacon->cost_from_start < goal_node_->cost_from_start * 0.1 ||
-             beacon->cost_from_start > goal_node_->cost_from_start * 0.9 ||
+      while (beacon->cost_from_start == calDist(start_node_->x, beacon->x) &&
              beacon->cost_from_start + calDist(beacon->x, goal_node_->x) >= goal_node_->cost_from_start)
       {
         rand = sampler_.getUniRandNum();

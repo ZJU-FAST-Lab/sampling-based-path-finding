@@ -49,18 +49,18 @@ private:
 public:
     TesterPathFinder(const ros::NodeHandle &nh) : nh_(nh)
     {
-        env_ptr_.reset(new env::OccMap);
+        env_ptr_ = std::make_shared<env::OccMap>();
         env_ptr_->init(nh_);
 
         vis_ptr_ = std::make_shared<visualization::Visualization>(nh_);
 
-        rrt_sharp_ptr_.reset(new path_plan::RRTSharp(nh_, env_ptr_));
+        rrt_sharp_ptr_ = std::make_shared<path_plan::RRTSharp>(nh_, env_ptr_);
         rrt_sharp_ptr_->setVisualizer(vis_ptr_);
 
-        rrt_star_ptr_.reset(new path_plan::RRTStar(nh_, env_ptr_));
+        rrt_star_ptr_ = std::make_shared<path_plan::RRTStar>(nh_, env_ptr_);
         rrt_star_ptr_->setVisualizer(vis_ptr_);
 
-        rrt_ptr_.reset(new path_plan::RRT(nh_, env_ptr_));
+        rrt_ptr_ = std::make_shared<path_plan::RRT>(nh_, env_ptr_);
         rrt_ptr_->setVisualizer(vis_ptr_);
 
         goal_sub_ = nh_.subscribe("/goal", 1, &TesterPathFinder::goalCallback, this);
