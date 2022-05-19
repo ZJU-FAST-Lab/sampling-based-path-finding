@@ -58,3 +58,25 @@ _O. Arslan and P. Tsiotras, "Use of relaxation methods in sampling-based algorit
 <p align="center">
   <img src="misc/guild-rrt-sharp.gif" width = "655" height = "477"/>
 </p>
+
+## Bidirectional RRT
+### RRT_Connect (BRRT)
+
+_Kuffner, James J., and Steven M. LaValle. "RRT-connect: An efficient approach to single-query path planning." Proceedings 2000 ICRA._
+<p align="center">
+  <img src="misc/brrt.gif" width = "655" height = "477"/>
+</p>
+
+### IB-RRT*
+
+_Qureshi, Ahmed Hussain, and Yasar Ayaz. "Intelligent bidirectional rapidly-exploring random trees for optimal motion planning in complex cluttered environments." Robotics and Autonomous Systems 68 (2015): 1-11._
+
+<p align="center">
+  <img src="misc/brrt*.gif" width = "655" height = "477"/>
+</p>
+
+### IB-RRT* with informed sampling
+
+<p align="center">
+  <img src="misc/informed_brrt*.gif" width = "655" height = "477"/>
+</p>

@@ -12,12 +12,14 @@
   <arg name="steer_length" value="2.0" />
   <arg name="search_radius" value="6.0" />
   <arg name="search_time" value="0.1" />
-  <arg name="max_tree_node_nums" value="5000" />
-  <arg name="use_informed_sampling" value="false" />
-  <arg name="use_GUILD_sampling" value="true" />
+  <arg name="max_tree_node_nums" value="1000" />
+  <arg name="use_informed_sampling" value="true" />
+  <arg name="use_GUILD_sampling" value="false" />
   <arg name="run_rrt" value="true" />
   <arg name="run_rrt_star" value="true" />
   <arg name="run_rrt_sharp" value="true" />
+  <arg name="run_brrt" value="true" />
+  <arg name="run_brrt_star" value="true" />
 
 
   <node pkg="path_finder" type="path_finder" name="path_finder_node" output="screen">
@@ -26,6 +28,8 @@
     <param name="run_rrt" value="$(arg run_rrt)" type="bool"/>
     <param name="run_rrt_star" value="$(arg run_rrt_star)" type="bool"/>
     <param name="run_rrt_sharp" value="$(arg run_rrt_sharp)" type="bool"/>
+    <param name="run_brrt" value="$(arg run_brrt)" type="bool"/>
+    <param name="run_brrt_star" value="$(arg run_brrt_star)" type="bool"/>
 
     <param name="occ_map/origin_x" value="$(arg origin_x)" type="double"/>
     <param name="occ_map/origin_y" value="$(arg origin_y)" type="double"/>
@@ -53,6 +57,16 @@
     <param name="RRT_Sharp/max_tree_node_nums" value="$(arg max_tree_node_nums)" type="int"/>
     <param name="RRT_Sharp/use_informed_sampling" value="$(arg use_informed_sampling)" type="bool"/>
     <param name="RRT_Sharp/use_GUILD_sampling" value="$(arg use_GUILD_sampling)" type="bool"/>
+
+    <param name="BRRT/steer_length" value="$(arg steer_length)" type="double"/>
+    <param name="BRRT/search_time" value="$(arg search_time)" type="double"/>
+    <param name="BRRT/max_tree_node_nums" value="$(arg max_tree_node_nums)" type="int"/>
+
+    <param name="BRRT_Star/steer_length" value="$(arg steer_length)" type="double"/>
+    <param name="BRRT_Star/search_radius" value="$(arg search_radius)" type="double"/>
+    <param name="BRRT_Star/search_time" value="$(arg search_time)" type="double"/>
+    <param name="BRRT_Star/max_tree_node_nums" value="$(arg max_tree_node_nums)" type="int"/>
+    <param name="BRRT_Star/use_informed_sampling" value="$(arg use_informed_sampling)" type="bool"/>
 
   </node>
 

@@ -23,6 +23,8 @@ OF SUCH DAMAGE.
 #include "path_finder/rrt_sharp.h"
 #include "path_finder/rrt_star.h"
 #include "path_finder/rrt.h"
+#include "path_finder/brrt.h"
+#include "path_finder/brrt_star.h"
 #include "visualization/visualization.hpp"
 
 #include <ros/ros.h>
@@ -41,10 +43,13 @@ private:
     shared_ptr<path_plan::RRTSharp> rrt_sharp_ptr_;
     shared_ptr<path_plan::RRTStar> rrt_star_ptr_;
     shared_ptr<path_plan::RRT> rrt_ptr_;
+    shared_ptr<path_plan::BRRT> brrt_ptr_;
+    shared_ptr<path_plan::BRRTStar> brrt_star_ptr_;
 
     Eigen::Vector3d start_, goal_;
 
     bool run_rrt_, run_rrt_star_, run_rrt_sharp_;
+    bool run_brrt_, run_brrt_star_;
 
 public:
     TesterPathFinder(const ros::NodeHandle &nh) : nh_(nh)
@@ -63,6 +68,12 @@ public:
         rrt_ptr_ = std::make_shared<path_plan::RRT>(nh_, env_ptr_);
         rrt_ptr_->setVisualizer(vis_ptr_);
 
+        brrt_ptr_ = std::make_shared<path_plan::BRRT>(nh_, env_ptr_);
+        brrt_ptr_->setVisualizer(vis_ptr_);
+
+        brrt_star_ptr_ = std::make_shared<path_plan::BRRTStar>(nh_, env_ptr_);
+        brrt_star_ptr_->setVisualizer(vis_ptr_);
+
         goal_sub_ = nh_.subscribe("/goal", 1, &TesterPathFinder::goalCallback, this);
         execution_timer_ = nh_.createTimer(ros::Duration(1), &TesterPathFinder::executionCallback, this);
         rcv_glb_obs_client_ = nh_.serviceClient<self_msgs_and_srvs::GlbObsRcv>("/pub_glb_obs");
@@ -72,6 +83,8 @@ public:
         nh_.param("run_rrt", run_rrt_, true);
         nh_.param("run_rrt_star", run_rrt_star_, true);
         nh_.param("run_rrt_sharp", run_rrt_sharp_, true);
+        nh_.param("run_brrt", run_brrt_, false);
+        nh_.param("run_brrt_star", run_brrt_star_, false);
     }
     ~TesterPathFinder(){};
 
@@ -137,6 +150,33 @@ public:
                 ROS_INFO_STREAM("[RRT#] final path len: " << slns.back().first);
             }
         }
+
+        if (run_brrt_)
+        {
+            bool brrt_res = brrt_ptr_->plan(start_, goal_);
+            if (brrt_res)
+            {
+                vector<Eigen::Vector3d> final_path = brrt_ptr_->getPath();
+                vis_ptr_->visualize_path(final_path, "brrt_final_path");
+                vis_ptr_->visualize_pointcloud(final_path, "brrt_final_wpts");
+                vector<std::pair<double, double>> slns = brrt_ptr_->getSolutions();
+                ROS_INFO_STREAM("[BRRT] final path len: " << slns.back().first);
+            }
+        }
+
+        if (run_brrt_star_)
+        {
+            bool brrt_star_res = brrt_star_ptr_->plan(start_, goal_);
+            if (brrt_star_res)
+            {
+                vector<Eigen::Vector3d> final_path = brrt_star_ptr_->getPath();
+                vis_ptr_->visualize_path(final_path, "brrt_star_final_path");
+                vis_ptr_->visualize_pointcloud(final_path, "brrt_star_final_wpts");
+                vector<std::pair<double, double>> slns = brrt_star_ptr_->getSolutions();
+                ROS_INFO_STREAM("[BRRT*] final path len: " << slns.back().first);
+            }
+        }
+        
         start_ = goal_;
     }
 
