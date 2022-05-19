@@ -60,7 +60,7 @@ _O. Arslan and P. Tsiotras, "Use of relaxation methods in sampling-based algorit
 </p>
 
 ## Bidirectional RRT
-### RRT_Connect (BRRT)
+### RRT-connect (BRRT)
 
 _Kuffner, James J., and Steven M. LaValle. "RRT-connect: An efficient approach to single-query path planning." Proceedings 2000 ICRA._
 <p align="center">
