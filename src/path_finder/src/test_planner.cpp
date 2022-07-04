@@ -58,21 +58,34 @@ public:
         env_ptr_->init(nh_);
 
         vis_ptr_ = std::make_shared<visualization::Visualization>(nh_);
+        vis_ptr_->registe<visualization_msgs::Marker>("start");
+        vis_ptr_->registe<visualization_msgs::Marker>("goal");
 
         rrt_sharp_ptr_ = std::make_shared<path_plan::RRTSharp>(nh_, env_ptr_);
         rrt_sharp_ptr_->setVisualizer(vis_ptr_);
+        vis_ptr_->registe<nav_msgs::Path>("rrt_sharp_final_path");
+        vis_ptr_->registe<sensor_msgs::PointCloud2>("rrt_sharp_final_wpts");
 
         rrt_star_ptr_ = std::make_shared<path_plan::RRTStar>(nh_, env_ptr_);
         rrt_star_ptr_->setVisualizer(vis_ptr_);
+        vis_ptr_->registe<nav_msgs::Path>("rrt_star_final_path");
+        vis_ptr_->registe<sensor_msgs::PointCloud2>("rrt_star_final_wpts");
+        vis_ptr_->registe<visualization_msgs::MarkerArray>("rrt_star_paths");
 
         rrt_ptr_ = std::make_shared<path_plan::RRT>(nh_, env_ptr_);
         rrt_ptr_->setVisualizer(vis_ptr_);
+        vis_ptr_->registe<nav_msgs::Path>("rrt_final_path");
+        vis_ptr_->registe<sensor_msgs::PointCloud2>("rrt_final_wpts");
 
         brrt_ptr_ = std::make_shared<path_plan::BRRT>(nh_, env_ptr_);
         brrt_ptr_->setVisualizer(vis_ptr_);
+        vis_ptr_->registe<nav_msgs::Path>("brrt_final_path");
+        vis_ptr_->registe<sensor_msgs::PointCloud2>("brrt_final_wpts");
 
         brrt_star_ptr_ = std::make_shared<path_plan::BRRTStar>(nh_, env_ptr_);
         brrt_star_ptr_->setVisualizer(vis_ptr_);
+        vis_ptr_->registe<nav_msgs::Path>("brrt_star_final_path");
+        vis_ptr_->registe<sensor_msgs::PointCloud2>("brrt_star_final_wpts");
 
         goal_sub_ = nh_.subscribe("/goal", 1, &TesterPathFinder::goalCallback, this);
         execution_timer_ = nh_.createTimer(ros::Duration(1), &TesterPathFinder::executionCallback, this);

@@ -510,6 +510,15 @@ namespace visualization
             }
             publisher_map_[topic].publish(path_list_msg);
         }
+
+        template <class TOPIC_TYPE, class TOPIC>
+        void registe(const TOPIC& topic) {
+            auto got = publisher_map_.find(topic);
+            if (got == publisher_map_.end()) {
+                ros::Publisher pub = nh_.advertise<TOPIC_TYPE>(topic, 10);
+                publisher_map_[topic] = pub;
+            }
+        }
     };
 
 } // namespace visualization

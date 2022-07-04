@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(occ_grid)
 
 set(CMAKE_BUILD_TYPE "Release")
-set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS} -O3 -Wall")
+set(CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS} -O3 -Wall")
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
